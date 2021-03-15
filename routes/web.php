@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::resource('admin/categories', \App\Http\Controllers\Admin\CategoryController::class);
+Route::resource('admin/products', \App\Http\Controllers\Admin\ProductController::class);
