@@ -20,48 +20,40 @@ class ProductController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show(int $id)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'product' => ProductService::getProductById($id),
+            ],
+        ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        if (ProductService::updateProduct($request->all(), $id)) {
+            return response()->json([
+                'success' => true,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+            ], 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        if (ProductService::deleteProduct($id)) {
+            return response()->json([
+                'success' => true,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+            ], 500);
+        }
     }
 }

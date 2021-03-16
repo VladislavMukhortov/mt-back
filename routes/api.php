@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['namespace' => 'Api\v_1', 'prefix' => 'v_1', 'as' => 'api.'], function () {
-    Route::get('products', 'ProductController@index');
+Route::group(['namespace' => 'App\Http\Controllers\Api\v1', 'prefix' => 'v1', 'as' => 'api.'], function () {
+    Route::get('/products', 'ProductController@index');
+    Route::get('/product/{id}', 'ProductController@show');
+    Route::put('/product/update/{id}', 'ProductController@update');
+    Route::delete('/product/{id}', 'ProductController@destroy');
 });
