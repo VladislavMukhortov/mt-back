@@ -19,7 +19,7 @@ class ProductController extends Controller
             ],
         ], 200);
     }
-
+//some
     public function show(int $id)
     {
         return response()->json([
